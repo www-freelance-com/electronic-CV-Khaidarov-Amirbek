@@ -1,0 +1,85 @@
+<div class="navigation">
+    <button class="prev-btn">Назад</button>
+    <button class="next-btn">Вперед</button>
+  </div>
+<div class="slider-container">
+
+    
+    <div class="cards-wrapper">
+      <div class="card">Карточка 1</div>
+      <div class="card">Карточка 2</div>
+      <div class="card">Карточка 3</div>
+      <div class="card">Карточка 4</div>
+      <div class="card">Карточка 5</div>
+      <div class="card">Карточка 6</div>
+      <div class="card">Карточка 7</div>
+      <div class="card">Карточка 8</div>
+      <div class="card">Карточка 9</div>
+    </div>
+    
+  </div>
+<style>
+    .slider-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.cards-wrapper {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.card {
+  flex: 0 0 100%; /* Каждая карточка занимает всю ширину контейнера */
+  padding: 20px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+}
+
+.navigation {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.prev-btn, .next-btn {
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+</style>  
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+  const cardsWrapper = document.querySelector(".cards-wrapper");
+  const prevBtn = document.querySelector(".prev-btn");
+  const nextBtn = document.querySelector(".next-btn");
+
+  let currentIndex = 0;
+  const cardWidth = document.querySelector(".card").offsetWidth;
+  const cardCount = document.querySelectorAll(".card").length;
+  
+  // Переход к предыдущей карточке
+  prevBtn.addEventListener("click", function() {
+    currentIndex = Math.max(currentIndex - 1, 0);
+    updateSliderPosition();
+  });
+  
+  // Переход к следующей карточке
+  nextBtn.addEventListener("click", function() {
+    currentIndex = Math.min(currentIndex + 1, cardCount - 1);
+    updateSliderPosition();
+  });
+
+  // Обновление позиции слайдера
+  function updateSliderPosition() {
+    const newPosition = -currentIndex * cardWidth;
+    cardsWrapper.style.transform = `translateX(${newPosition}px)`;
+  }
+});
+
+</script>
